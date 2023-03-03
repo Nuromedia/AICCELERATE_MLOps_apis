@@ -4,7 +4,7 @@ info:
   version: '1.0.1'
   description: 'Predictions API for Pilot 1.1 (HSJD) in the AICCELERATE project.'
 servers:
-  - url: TBA/v1
+  - url: https://TBA/v1
 paths:
   /ping:
     get:
@@ -23,7 +23,7 @@ paths:
               schema:
                 type: array
                 items: 
-                   $ref: "#/components/schemas/ModelInfoResponse"
+                   $ref: "AICCELERATE_Api_Definitions.yml#/definitions/schemas/ModelInfoResponse"
                   
   /model/{modelName}:
     post:
@@ -39,7 +39,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InferenceRequest'
+              $ref: "AICCELERATE_Api_Definitions.yml#/definitions/schemas/InferenceRequest"
       responses:
         '200':
           description: OK
@@ -49,9 +49,9 @@ paths:
                 type: object
                 properties:
                   inference:
-                    $ref: "#/components/schemas/ModelInferenceResponse"
+                    $ref: "AICCELERATE_Api_Definitions.yml#/definitions/schemas/ModelInferenceResponse"
                   explanation: 
-                    $ref: "#/components/schemas/ModelXAIResponse"
+                    $ref: "AICCELERATE_Api_Definitions.yml#/definitions/schemas/ModelXAIResponse"
     get:
       description: 'Retrieve information about the model'
       responses:
@@ -60,61 +60,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ModelInfoResponse'
+                $ref: 'AICCELERATE_Api_Definitions.yml#/definitions/schemas/ModelInfoResponse'
   /model/{modelName}/ping:
     get:
       description: 'Health check of model'
       responses:
         '200':
           description: OK
-components:
-  schemas:
-    ModelInfoResponse:
-      title: Model Information
-      type: object
-      properties:
-        name:
-          type: string
-        version:
-          type: string
-        description:
-          type: string
-        datetime:
-          type: string
-          format: date-time
-    ModelInferenceResponse:
-      title: Inference Results
-      type: object
-      properties:
-        prediction:
-          type: number
-        uncertainty:
-          type: number
-        uncertaintyDescription:
-          type: string
-        additionalInformation:
-          type: string
-    ModelXAIResponse:
-      title: Explainable AI Results
-      type: object
-      properties:
-        featureImportances:
-          type: object
-          additionalProperties:
-            type: number
-          example:
-            feature1: 0.2
-            feature2: 0.9
-            feature3: 0.5
-    InferenceRequest:
-      title: Inference Request
-      type: object
-      properties:
-        patientId:
-          type: string
-        withExplanations:
-          type: boolean
-      required:
-        - patientId
-        
-

@@ -1,0 +1,24 @@
+openapi: '3.0.2'
+info:
+  title: AICCELERATE Model Predictions Api
+  version: '1.0.1'
+servers:
+  - url: https://TBA/v1
+paths:
+  /ping:
+    get:
+      description: 'Health check of model'
+      responses:
+        '200':
+          description: OK
+  /predictions:
+    post:
+      description: 'Perform inference on the model'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'AICCELERATE_Api_Definitions.yml#/definitions/schemas/ModelInferenceRequest'
+      responses:
+        '200':
+          description: OK

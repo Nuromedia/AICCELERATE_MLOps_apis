@@ -1,0 +1,60 @@
+info:
+  title: AICCELERATE API Definitions
+  version: '1.0.1'
+  description: 'Common definitions for the AICCELERATE AI APIs.'
+definitions:
+  schemas:
+    ModelInfoResponse:
+      title: Model Information
+      type: object
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        description:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+    ModelInferenceResponse:
+      title: Inference Results
+      type: object
+      properties:
+        prediction:
+          type: number
+        uncertainty:
+          type: number
+        uncertaintyDescription:
+          type: string
+        additionalInformation:
+          type: string
+    ModelXAIResponse:
+      title: Explainable AI Results
+      type: object
+      properties:
+        featureImportances:
+          type: object
+          additionalProperties:
+            type: number
+          example:
+            feature1: 0.2
+            feature2: 0.9
+            feature3: 0.5
+    InferenceRequest:
+      title: Inference Request
+      type: object
+      properties:
+        patientId:
+          type: string
+        withExplanations:
+          type: boolean
+      required:
+        - patientId
+    ModelInferenceRequest:
+      title: Internal Model Inference Request
+      type: object
+      properties:
+        data:
+          type: string
+          format: binary
